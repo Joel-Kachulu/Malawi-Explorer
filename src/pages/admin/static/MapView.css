@@ -1,0 +1,13 @@
+.map-container {
+  height: 500px;
+  width: 100%;
+  position: relative;
+  z-index: 0;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+/* Fix for Leaflet's default icon paths */
+.leaflet-default-icon-path {
+  background-image: url(https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png);
+}
