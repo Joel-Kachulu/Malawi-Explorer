@@ -128,6 +128,7 @@ const MainAppLayout = () => (
 const AdminRoutes = () => (
   <AdminLayout>
     <Routes>
+      <Route index element={<AdminDashboardPage />} />  {/* Handles /admin */}
       <Route path="dashboard" element={<AdminDashboardPage />} />
       <Route path="content" element={<AdminContentPage />} />
       <Route path="analytics" element={<AdminAnalyticsPage />} />
