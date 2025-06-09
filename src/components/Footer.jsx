@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Instagram, Mail, Heart } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Linkedin, Mail, Heart } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -9,61 +8,75 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">Malawi Explorer</h3>
+            <h3 className="text-xl font-bold mb-4">Malawi Explorer Tech</h3>
             <p className="text-gray-300 mb-4">
-              Discover the rich history and beautiful places of Malawi, the Warm Heart of Africa.
+              Your premier source for tech news, innovations, and digital trends in Malawi and beyond.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-300 hover:text-primary transition-colors">
+              <a href="https://facebook.com/MalawiExplorerTech" className="text-gray-300 hover:text-primary transition-colors">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="text-gray-300 hover:text-primary transition-colors">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-primary transition-colors">
+              <a href="https://instagram.com/MalawiExplorerTech" className="text-gray-300 hover:text-primary transition-colors">
                 <Instagram size={20} />
               </a>
-              <a href="#" className="text-gray-300 hover:text-primary transition-colors">
+              <a href="https://youtube.com/MalawiExplorerTech" className="text-gray-300 hover:text-primary transition-colors">
+                <Youtube size={20} />
+              </a>
+              <a href="https://linkedin.com/company/MalawiExplorerTech" className="text-gray-300 hover:text-primary transition-colors">
+                <Linkedin size={20} />
+              </a>
+              <a href="mailto:tech@malawiexplorer.com" className="text-gray-300 hover:text-primary transition-colors">
                 <Mail size={20} />
               </a>
             </div>
           </div>
           
           <div>
-            <h3 className="text-xl font-bold mb-4">Quick Links</h3>
+            <h3 className="text-xl font-bold mb-4">Tech Sections</h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/" className="text-gray-300 hover:text-primary transition-colors">
-                  Home
+                  Latest News
                 </Link>
               </li>
               <li>
                 <Link to="/history" className="text-gray-300 hover:text-primary transition-colors">
-                  History
+                  Tech Evolution
                 </Link>
               </li>
               <li>
                 <Link to="/places" className="text-gray-300 hover:text-primary transition-colors">
-                  Places
+                  Startups & Hubs
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="text-gray-300 hover:text-primary transition-colors">
+                  Tech Events
                 </Link>
               </li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-xl font-bold mb-4">Contact</h3>
-            <p className="text-gray-300 mb-2">Lilongwe, Malawi</p>
-            <p className="text-gray-300 mb-2">info@malawiexplorer.com</p>
-            <p className="text-gray-300">+265 123 456 789</p>
+            <h3 className="text-xl font-bold mb-4">Get In Touch</h3>
+            <p className="text-gray-300 mb-2">Malawi Tech Explorer</p>
+            <p className="text-gray-300 mb-2">tech.malawiexplorer@gmail.com</p>
+            <p className="text-gray-300">+265 995 077 260</p>
+            <p className="text-gray-300 mt-4 text-sm">
+              Submit your startup or tech story: pitches.malawiexplorer@gmail.com
+            </p>
           </div>
         </div>
         
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
           <p className="flex items-center justify-center">
-            Made with <Heart size={16} className="mx-1 text-red-500" /> for Malawi
+            Built with <Heart size={16} className="mx-1 text-red-500" /> for Malawi's Tech
           </p>
           <p className="mt-2">
-            &copy; {new Date().getFullYear()} Malawi Explorer. All rights reserved.
+            &copy; {new Date().getFullYear()} Malawi Tech Explorer. All rights reserved.
+          </p>
+          <p className="mt-2 text-sm">
+            Covering Malawi's digital transformation since {new Date().getFullYear()}
           </p>
         </div>
       </div>

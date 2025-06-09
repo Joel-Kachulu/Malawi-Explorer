@@ -14,8 +14,8 @@ const Navbar = () => {
 
   const navItems = [
     { name: 'Home', path: '/' },
-    { name: 'History', path: '/history' },
-    { name: 'Places', path: '/places' },
+    { name: 'Tech Revolution', path: '/history' },
+    { name: 'Blogs', path: '/places' },
   ];
 
   const navVariants = {
@@ -34,7 +34,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center space-x-2">
             <img-replace src="/logo-malawi.png" alt="Malawi Explorer Logo" className="h-10 w-auto" />
-            <span className="text-2xl font-bold text-primary">Malawi Explorer</span>
+            <span className="text-2xl font-bold text-primary">Malawi Tech Explorer</span>
           </Link>
 
           <div className="hidden md:flex items-center space-x-6">
