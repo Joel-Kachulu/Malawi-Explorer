@@ -24,10 +24,6 @@ const PlaceCard = ({ place, variants }) => (
       <CardContent className="p-6 flex flex-col">
         <div className="flex-grow">
           <h3 className="text-xl font-bold mb-2">{place.title}</h3>
-          <div className="flex items-center text-sm text-gray-500 mb-3">
-            <MapPin className="h-4 w-4 mr-1 flex-shrink-0" />
-            <span>{place.location || 'Malawi'}</span>
-          </div>
           <p className="text-gray-700 mb-4 line-clamp-3">
             {place.description}
           </p>
@@ -133,7 +129,7 @@ const PlacesPage = () => {
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Explore Malawi Tech</h1>
             <p className="text-xl opacity-90">
-              Discover historical sites, natural wonders, and cultural landmarks that tell the story of Malawi.
+              Explore Malawi’s thriving tech ecosystem: startups, innovation hubs, digital infrastructure, and smart solutions shaping the future.
             </p>
           </motion.div>
         </div>
@@ -207,7 +203,7 @@ const PlacesPage = () => {
       </section>
     
     
-    <section className="py-16 bg-white">
+      {/*<section className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">Malawi Map</h2>
@@ -217,7 +213,7 @@ const PlacesPage = () => {
         </div>
         <MapView />
       </div>
-    </section>
+    </section>*/}
     
     </main>
   );
