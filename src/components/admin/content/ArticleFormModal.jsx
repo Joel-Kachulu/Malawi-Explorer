@@ -51,8 +51,7 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
     tags: '',
     category_id: '',
     image_file: null,
-    video_url: '',
-    location_details: ''
+    video_url: ''
   });
   const [categories, setCategories] = useState([]);
   const [isLoadingCategories, setIsLoadingCategories] = useState(false);
@@ -85,8 +84,7 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
           tags: article.tags ? article.tags.join(', ') : '',
           category_id: article.category_id || '',
           image_file: null,
-          video_url: article.video_url || '',
-          location_details: article.location_details || ''
+          video_url: article.video_url || ''
         });
         setPreviewImage(article.featured_image_url || null);
       } else {
@@ -98,8 +96,7 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
           tags: '',
           category_id: '',
           image_file: null,
-          video_url: '',
-          location_details: ''
+          video_url: ''
         });
         setPreviewImage(null);
       }
@@ -166,10 +163,6 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
                 className="h-60"
               />
             </div>
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="location_details">Location Details</Label>
-            <Input id="location_details" name="location_details" value={formData.location_details} onChange={handleInputChange} placeholder="e.g., Eastern Region, Malawi" required />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="grid gap-2">
