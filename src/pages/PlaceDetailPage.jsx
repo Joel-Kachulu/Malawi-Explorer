@@ -54,7 +54,7 @@ const PlaceDetailPage = () => {
         content: data.content,
         publish_date: data.publish_date,
         tags: data.tags || [],
-        category: data.categories?.name || 'Uncategorized'
+        category: data.categories?.name || 'Uncategorized',
         images: data.media?.filter(m => m.type === 'image').map(m => ({
           url: m.file_path,
           caption: m.caption,
@@ -66,7 +66,7 @@ const PlaceDetailPage = () => {
       });
     } catch (error) {
       toast({
-        title: "Error fetching place details",
+        title: "Error fetching blog details",
         description: error.message,
         variant: "destructive",
       });
@@ -127,11 +127,7 @@ const PlaceDetailPage = () => {
               <ArrowLeft className="mr-2 h-4 w-4" /> Back to Blogs
             </Link>
           </Button>
-          <h1 className="text-3xl font-bold">{place.title}</h1>
-          <div className="flex items-center text-sm">
-            <MapPin className="mr-2 w-4 h-4" />
-            {place.location}
-          </div>
+          
           <Badge className="bg-green-600 hover:bg-green-700 text-white">
             {place.category}
           </Badge>
