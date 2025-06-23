@@ -39,8 +39,7 @@ const PlaceDetailPage = () => {
           publish_date,
           tags,
           categories (name),
-          media (file_path, type, caption),
-          location_details 
+          media (file_path, type, caption)
         `)
         .eq('id', id)
         .single();
@@ -55,8 +54,7 @@ const PlaceDetailPage = () => {
         content: data.content,
         publish_date: data.publish_date,
         tags: data.tags || [],
-        category: data.categories?.name || 'Uncategorized',
-        location: data.location_details || 'Malawi',
+        category: data.categories?.name || 'Uncategorized'
         images: data.media?.filter(m => m.type === 'image').map(m => ({
           url: m.file_path,
           caption: m.caption,
@@ -94,13 +92,13 @@ const PlaceDetailPage = () => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-6 text-center">
         <Info size={64} className="text-red-500 mb-4" />
-        <h1 className="text-3xl font-semibold text-gray-800 mb-2">Place Not Found</h1>
+        <h1 className="text-3xl font-semibold text-gray-800 mb-2">Blogs Not Found</h1>
         <p className="text-gray-600 mb-6 max-w-md">
-          Sorry, we couldn't find the details for this place. It might have been removed or the link is incorrect.
+          Sorry, we couldn't find the details for this blogs. It might have been removed or the link is incorrect.
         </p>
         <Button asChild>
           <Link to="/places">
-            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Places
+            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Blogs
           </Link>
         </Button>
       </div>
@@ -126,7 +124,7 @@ const PlaceDetailPage = () => {
         <div className="absolute bottom-6 left-6 z-20 max-w-md space-y-3 text-white">
           <Button asChild variant="secondary" className="bg-white/80 hover:bg-white text-black">
             <Link to="/places">
-              <ArrowLeft className="mr-2 h-4 w-4" /> Back to Places
+              <ArrowLeft className="mr-2 h-4 w-4" /> Back to Blogs
             </Link>
           </Button>
           <h1 className="text-3xl font-bold">{place.title}</h1>
