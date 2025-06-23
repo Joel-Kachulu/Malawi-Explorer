@@ -73,7 +73,6 @@ const PlacesPage = () => {
         description: item.description,
         category_id: item.categories?.id,
         category: item.categories?.name || 'Uncategorized',
-        location: item.location_details || 'Malawi',
         featured_image_url: item.media?.find(m => m.file_path)?.file_path
       }));
       setAllPlaces(placesData);
@@ -197,7 +196,7 @@ const PlacesPage = () => {
             </motion.div>
           ) : (
             <div className="text-center py-16">
-              <h3 className="text-2xl font-bold text-gray-700 mb-4">No places found</h3>
+              <h3 className="text-2xl font-bold text-gray-700 mb-4">No blogs found</h3>
               <p className="text-gray-500 mb-8">Try adjusting your search or filter criteria.</p>
               <Button onClick={() => { setSearchTerm(''); setSelectedCategory('All'); }}>
                 Reset Filters
