@@ -62,7 +62,7 @@ const PlacesPage = () => {
     try {
       const { data: articlesData, error: articlesError } = await supabase
         .from('articles')
-        .select('id, title, description, categories(id, name), media(file_path), location_details')
+        .select('id, title, description, categories(id, name), media(file_path))
         .order('created_at', { ascending: false });
 
       if (articlesError) throw articlesError;
@@ -131,7 +131,7 @@ const PlacesPage = () => {
             transition={{ duration: 0.6 }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Explore Malawi</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Explore Malawi Tech</h1>
             <p className="text-xl opacity-90">
               Discover historical sites, natural wonders, and cultural landmarks that tell the story of Malawi.
             </p>
