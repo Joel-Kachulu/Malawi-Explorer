@@ -121,7 +121,7 @@ const Header = ({ toggleSidebar, user }) => {
             <Button variant="ghost" onClick={toggleSidebar} className="md:hidden mr-2 text-foreground/70">
               <Menu className="h-6 w-6" />
             </Button>
-            <h1 className="text-xl font-semibold text-foreground hidden md:block">Tech Explorer Admin</h1>
+            <h1 className="text-xl font-semibold text-foreground hidden md:block">Malawi History Admin</h1>
           </div>
           
           <div className="flex items-center space-x-4">
