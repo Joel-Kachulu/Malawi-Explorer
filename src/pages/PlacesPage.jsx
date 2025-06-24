@@ -58,7 +58,7 @@ const PlacesPage = () => {
     try {
       const { data: articlesData, error: articlesError } = await supabase
         .from('articles')
-        .select('id, title, description, categories(id, name), media(file_path))
+        .select('id, title, description, categories(id, name), media(file_path)')
         .order('created_at', { ascending: false });
 
       if (articlesError) throw articlesError;
