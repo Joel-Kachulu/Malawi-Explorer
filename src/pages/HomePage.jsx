@@ -131,10 +131,6 @@ const FeaturedPlaceCard = ({ place, variants }) => (
         <div className="flex items-start justify-between mb-3">
           <h3 className="text-xl font-bold">{place.title}</h3>
         </div>
-        <div className="flex items-center text-sm text-gray-500 mb-4">
-          <MapPin className="h-4 w-4 mr-1" />
-          <span>{place.location || 'Malawi'}</span>
-        </div>
         <p className="text-gray-700 mb-4 line-clamp-3">
           {place.description}
         </p>
