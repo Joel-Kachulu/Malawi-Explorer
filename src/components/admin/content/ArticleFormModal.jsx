@@ -12,16 +12,17 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from "@/components/ui/dialog";
 
+// Define toolbar options for the rich text editor
 const modules = {
   toolbar: [
     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
     ['bold', 'italic', 'underline', 'strike'],
-    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
     ['link', 'image'],
     ['clean'],
     [{ 'color': [] }, { 'background': [] }],
@@ -121,7 +122,7 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
       };
       reader.readAsDataURL(file);
     } else {
-      setFormData(prev => ({ ...prev, image_file: null }));
+      setFormData(prev => ({...prev, image_file: null}));
       setPreviewImage(article?.featured_image_url || null);
     }
   };
@@ -140,18 +141,15 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
             {article ? 'Update the details of the article.' : 'Fill in the details for the new article.'}
           </DialogDescription>
         </DialogHeader>
-        
         <form onSubmit={handleSubmit} className="grid gap-6 py-4">
           <div className="grid gap-2">
             <Label htmlFor="title">Title</Label>
             <Input id="title" name="title" value={formData.title} onChange={handleInputChange} required />
           </div>
-
           <div className="grid gap-2">
             <Label htmlFor="description">Short Description</Label>
             <Textarea id="description" name="description" value={formData.description} onChange={handleInputChange} rows={3} required />
           </div>
-
           <div className="grid gap-4">
             <Label htmlFor="content">Content</Label>
             <div className="rounded-md border border-input bg-background">
@@ -166,7 +164,6 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
               />
             </div>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="grid gap-2">
               <Label htmlFor="publish_date">Publish Date</Label>
@@ -191,12 +188,10 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
               {isLoadingCategories && <p className="text-xs text-gray-500">Loading categories...</p>}
             </div>
           </div>
-
           <div className="grid gap-2">
             <Label htmlFor="tags">Tags (comma-separated)</Label>
             <Input id="tags" name="tags" value={formData.tags} onChange={handleInputChange} />
           </div>
-
           <div className="grid gap-2">
             <Label htmlFor="image_file">Featured Image</Label>
             {previewImage && (
@@ -213,19 +208,17 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
             </label>
             {formData.image_file && <p className="text-sm text-gray-500 mt-1">New file: {formData.image_file.name}</p>}
           </div>
-
           <div className="grid gap-2">
             <Label htmlFor="video_url">Video URL</Label>
             <Input id="video_url" name="video_url" value={formData.video_url} onChange={handleInputChange} placeholder="https://www.youtube.com/watch?v=example" />
           </div>
-
-          <DialogFooter>
-            <Button variant="outline" type="button" onClick={() => { setPreviewImage(null); onClose(); }}>Cancel</Button>
-            <Button type="submit" className="bg-green-600 hover:bg-green-700">
-              {article ? 'Save Changes' : 'Add Article'}
-            </Button>
-          </DialogFooter>
         </form>
+        <DialogFooter>
+          <Button variant="outline" onClick={() => { setPreviewImage(null); onClose(); }}>Cancel</Button>
+          <Button type="submit" onClick={handleSubmit} className="bg-green-600 hover:bg-green-700">
+            {article ? 'Save Changes' : 'Add Article'}
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
