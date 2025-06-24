@@ -65,7 +65,6 @@ const AdminContentPage = () => {
           id, 
           title, 
           description,
-          location_details,
           content,
           publish_date, 
           tags, 
@@ -104,18 +103,7 @@ const AdminContentPage = () => {
     article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     (article.tags && article.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))) ||
     (article.category && article.category.toLowerCase().includes(searchTerm.toLowerCase())) ||
-    (article.location_details && article.location_details.toLowerCase().includes(searchTerm.toLowerCase()))
   );
-
-  const onFormSubmit = async (formData) => {
-    if (!formData.location_details || formData.location_details.trim().length < 10) {
-      toast({
-        title: "Location too vague",
-        description: "Please provide a more specific location (e.g., 'Eastern Malawi near Monkey Bay').",
-        variant: "destructive"
-      });
-      return;
-    }
 
     await handleArticleSubmit(formData, currentArticle, supabase, toast, () => {
       fetchArticles();
