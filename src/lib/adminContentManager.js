@@ -17,7 +17,6 @@ export const handleArticleSubmit = async (formData, currentArticle, supabaseInst
     publish_date: articleFields.publish_date,
     tags: articleFields.tags ? articleFields.tags.split(',').map(tag => tag.trim()) : [],
     category_id: articleFields.category_id,
-    location_details: articleFields.location_details || '',
     video_url: articleFields.video_url || '',
   };
 
