@@ -138,9 +138,7 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
         <DialogHeader>
           <DialogTitle>{article ? 'Edit Article' : 'Add New Article'}</DialogTitle>
           <DialogDescription>
-            {article
-               ? 'Update the details of the historical article.'
-               : 'Fill in the details for the new historical article.'}
+            {article ? 'Update the details of the historical article.' : 'Fill in the details for the new historical article.'}
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="grid gap-6 py-4">
