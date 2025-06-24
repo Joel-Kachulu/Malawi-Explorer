@@ -119,7 +119,7 @@ const MainAppLayout = () => (
       </Routes>
     </main>
     <div className="fixed bottom-6 right-6 z-50">
-      <BuyMeACoffeeButton />
+      {/*<BuyMeACoffeeButton />*/}
     </div>
     <Footer />
   </>
