@@ -228,7 +228,6 @@ const HomePage = () => {
           title: 'AI Revolution: What’s Next for Developers',
           description: 'A deep dive into the tools and trends redefining the way software is built.',
           category: 'Artificial Intelligence',
-          location: 'Global',
           featured_image_url: 'https://images.unsplash.com/photo-1581093588401-4bfa4b30c527',
         },
         {
@@ -236,7 +235,6 @@ const HomePage = () => {
           title: 'Africa’s Rising Startup Ecosystem',
           description: 'How young tech entrepreneurs are reshaping economies across the continent.',
           category: 'Startups',
-          location: 'Africa',
           featured_image_url: 'https://images.unsplash.com/photo-1603570417831-38cbe6c4e9ed',
         },
         {
@@ -244,7 +242,6 @@ const HomePage = () => {
           title: '5G and Beyond: The Next-Gen Networks',
           description: 'The technologies that will power the internet of the future.',
           category: 'Telecom',
-          location: 'Worldwide',
           featured_image_url: 'https://images.unsplash.com/photo-1559027615-5e247fbb4c64',
         },
       ]);
@@ -254,7 +251,7 @@ const HomePage = () => {
     try {
       const { data, error } = await supabase
         .from('articles')
-        .select('id, title, description, categories(name), media(file_path), location_details') 
+        .select('id, title, description, categories(name), media(file_path)') 
         .order('created_at', { ascending: false })
         .limit(3);
 
@@ -265,14 +262,13 @@ const HomePage = () => {
         title: item.title,
         description: item.description,
         category: item.categories?.name || 'Uncategorized',
-        location: item.location_details || 'Malawi', 
         featured_image_url: item.media?.find(m => m.file_path)?.file_path 
       }));
       setFeaturedPlaces(placesData);
     } catch (error) {
       toast({ title: "Error fetching featured places", description: error.message, variant: "destructive" });
       setFeaturedPlaces([
-        { id: 'err1', title: 'Error Fetching Place 1', description: 'Please check connection.', category: 'Error', location: 'N/A', featured_image_url: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef' },
+        { id: 'err1', title: 'Error Fetching Place 1', description: 'Please check connection.', category: 'Error', featured_image_url: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef' },
       ]);
     }
   }, [toast]);
