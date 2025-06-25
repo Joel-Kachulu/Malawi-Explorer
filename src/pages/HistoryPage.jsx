@@ -211,7 +211,7 @@ const HistoryPage = () => {
 
                 <motion.div variants={itemVariants}>
                   <div className="relative overflow-hidden rounded-lg h-64 mt-8">
-                    <img className="w-full h-full object-cover" alt="Malawian tech entrepreneurs at work" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c" />
+                    <img className="w-full h-full object-cover" alt="Malawian tech entrepreneurs at work" src="/office.jpg" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
                       <div className="p-6 text-white">
                         <h3 className="text-xl font-bold mb-2">Growing Tech Community</h3>
