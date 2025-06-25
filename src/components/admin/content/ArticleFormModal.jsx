@@ -137,9 +137,7 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
       <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{article ? 'Edit Article' : 'Add New Article'}</DialogTitle>
-          <DialogDescription>
-            {article ? 'Update the details of the historical article.' : 'Fill in the details for the new historical article.'}
-          </DialogDescription>
+          
         </DialogHeader>
         <form onSubmit={handleSubmit} className="grid gap-6 py-4">
           <div className="grid gap-2">
