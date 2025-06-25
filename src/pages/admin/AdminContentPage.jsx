@@ -100,10 +100,10 @@ const AdminContentPage = () => {
   }, [fetchArticles]);
 
   const filteredArticles = articles.filter(article =>
-    article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (article.tags && article.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))) ||
-    (article.category && article.category.toLowerCase().includes(searchTerm.toLowerCase())) ||
-  );
+  article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  (article.tags && article.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))) ||
+  (article.category && article.category.toLowerCase().includes(searchTerm.toLowerCase()))
+);
 
    // Add this right before: const onDeleteArticle = async ...
 const onFormSubmit = async (formData) => {
