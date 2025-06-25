@@ -105,12 +105,15 @@ const AdminContentPage = () => {
     (article.category && article.category.toLowerCase().includes(searchTerm.toLowerCase())) ||
   );
 
-    await handleArticleSubmit(formData, currentArticle, supabase, toast, () => {
-      fetchArticles();
-      setIsModalOpen(false);
-      setCurrentArticle(null);
-    });
-  };
+   // Add this right before: const onDeleteArticle = async ...
+const onFormSubmit = async (formData) => {
+  await handleArticleSubmit(formData, currentArticle, supabase, toast, () => {
+    fetchArticles();
+    setIsModalOpen(false);
+    setCurrentArticle(null);
+  });
+};
+
 
   const onDeleteArticle = async (articleId, articleTitle) => {
     await deleteArticle(articleId, articleTitle, supabase, toast, fetchArticles);
