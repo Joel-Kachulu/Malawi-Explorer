@@ -130,8 +130,8 @@ const onFormSubmit = async (formData) => {
 
       <Card className="shadow-lg">
         <CardHeader>
-          <CardTitle>Historical Articles</CardTitle>
-          <CardDescription>View, edit, or delete historical articles.</CardDescription>
+          <CardTitle> My Articles</CardTitle>
+          <CardDescription>View, edit, or delete articles.</CardDescription>
           <ArticleSearchAndFilter searchTerm={searchTerm} onSearchTermChange={setSearchTerm} />
         </CardHeader>
         <CardContent>
