@@ -136,92 +136,94 @@ const PlaceDetailPage = () => {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Card className="rounded-2xl shadow-md mb-10">
-            <CardHeader>
-              <CardTitle className="text-2xl text-gray-800">About {place.title}</CardTitle>
-            </CardHeader>
-            <CardContent className="prose prose-lg max-w-none text-gray-700">
-              {place.content ? (
-                <div dangerouslySetInnerHTML={{ __html: place.content.replace(/\n/g, '<br />') }} />
-              ) : (
-                <p>No detailed content available for this place yet.</p>
-              )}
-            </CardContent>
-          </Card>
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="max-w-4xl mx-auto"
+  >
+    <Card className="rounded-2xl shadow-md mb-10">
+      <CardHeader>
+        <CardTitle className="text-2xl text-gray-800">About {place.title}</CardTitle>
+      </CardHeader>
+      <CardContent className="prose prose-lg max-w-none text-gray-700">
+        {place.content ? (
+          <div dangerouslySetInnerHTML={{ __html: place.content.replace(/\n/g, '<br />') }} />
+        ) : (
+          <p>No detailed content available for this place yet.</p>
+        )}
+      </CardContent>
+    </Card>
 
-          {place.images.length > 1 && (
-            <Card className="rounded-2xl shadow-md mb-10">
-              <CardHeader>
-                <CardTitle className="text-2xl text-gray-800 flex items-center">
-                  <ImageIcon className="mr-2 text-green-600" /> Gallery
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {place.images.slice(1).map((image, index) => (
-                    <div
-                      key={index}
-                      className="rounded-lg overflow-hidden shadow aspect-square"
-                    >
-                      <img
-                        src={image.url}
-                        alt={image.caption || `Image ${index + 1}`}
-                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                      />
-                      {image.caption && (
-                        <p className="text-xs text-center p-1 bg-gray-50">{image.caption}</p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          )}
+    {place.images.length > 1 && (
+      <Card className="rounded-2xl shadow-md mb-10">
+        <CardHeader>
+          <CardTitle className="text-2xl text-gray-800 flex items-center">
+            <ImageIcon className="mr-2 text-green-600" /> Gallery
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {place.images.slice(1).map((image, index) => (
+              <div
+                key={index}
+                className="rounded-lg overflow-hidden shadow aspect-square"
+              >
+                <img
+                  src={image.url}
+                  alt={image.caption || `Image ${index + 1}`}
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+                {image.caption && (
+                  <p className="text-xs text-center p-1 bg-gray-50">{image.caption}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    )}
 
-          {place.videos.length > 0 && (
-            <Card className="rounded-2xl shadow-md">
-              <CardHeader>
-                <CardTitle className="text-2xl text-gray-800 flex items-center">
-                  <Video className="mr-2 text-red-600" /> Videos
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {place.videos.map((video, index) => (
-                    <div key={index} className="rounded-lg overflow-hidden shadow-md">
-                      <div className="aspect-video bg-black">
-                        {video.url.includes("youtube.com") || video.url.includes("youtu.be") ? (
-                          <iframe
-                            className="w-full h-full"
-                            src={`https://www.youtube.com/embed/${video.url.split('v=')[1]?.split('&')[0] || video.url.split('/').pop()}`}
-                            title={video.caption || `Video ${index + 1}`}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          />
-                        ) : (
-                          <video controls className="w-full h-full">
-                            <source src={video.url} type="video/mp4" />
-                            Your browser does not support the video tag.
-                          </video>
-                        )}
-                      </div>
-                      {video.caption && (
-                        <p className="text-sm text-center p-2 bg-gray-100">{video.caption}</p>
-                      )}
-                    </div>
-                  ))}
+    {place.videos.length > 0 && (
+      <Card className="rounded-2xl shadow-md">
+        <CardHeader>
+          <CardTitle className="text-2xl text-gray-800 flex items-center">
+            <Video className="mr-2 text-red-600" /> Videos
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {place.videos.map((video, index) => (
+              <div key={index} className="rounded-lg overflow-hidden shadow-md">
+                <div className="aspect-video bg-black">
+                  {video.url.includes("youtube.com") || video.url.includes("youtu.be") ? (
+                    <iframe
+                      className="w-full h-full"
+                      src={`https://www.youtube.com/embed/${video.url.split('v=')[1]?.split('&')[0] || video.url.split('/').pop()}`}
+                      title={video.caption || `Video ${index + 1}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  ) : (
+                    <video controls className="w-full h-full">
+                      <source src={video.url} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  )}
                 </div>
-              </CardContent>
-            </Card>
-          )}
-        </motion.div>
-      </div>
+                {video.caption && (
+                  <p className="text-sm text-center p-2 bg-gray-100">{video.caption}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    )}
+  </motion.div>
+</div>
+
     </main>
   );
 };
