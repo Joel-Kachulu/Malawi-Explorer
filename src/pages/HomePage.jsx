@@ -80,7 +80,7 @@ const AboutMalawiSection = () => (
           </div>
           <h3 className="text-xl font-bold mb-4">Trending Innovations</h3>
           <p className="text-gray-700">
-            Dive into the latest advancements in AI, blockchain, quantum computing, and more.
+           Explore the latest breakthroughs in AI, blockchain, and digital tools shaping Malawi’s future.
           </p>
         </motion.div>
         <motion.div
