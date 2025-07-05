@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { supabase } from '@/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
-import MapView from './MapView';
 
 const PlaceCard = ({ place, variants }) => (
   <motion.div variants={variants} className="place-card">
@@ -18,7 +17,7 @@ const PlaceCard = ({ place, variants }) => (
           className="w-full h-full object-cover" 
         />
         <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-xs font-medium py-1 px-2 rounded-full">
-          {place.category || 'Historical Site'}
+          {place.category || 'startups'}
         </div>
       </div>
       <CardContent className="p-6 flex flex-col">
@@ -50,7 +49,7 @@ const PlacesPage = () => {
   const fetchPlacesAndCategories = useCallback(async () => {
     setIsLoading(true);
     if (!supabase) {
-      toast({ title: "Supabase not available", description: "Cannot fetch places.", variant: "destructive" });
+      toast({ title: "Supabase not available", description: "Cannot fetch article.", variant: "destructive" });
       setIsLoading(false);
       return;
     }
@@ -143,7 +142,7 @@ const PlacesPage = () => {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                 <input
                   type="text"
-                  placeholder="Search places by name or description..."
+                  placeholder="Search articles by title or description..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"

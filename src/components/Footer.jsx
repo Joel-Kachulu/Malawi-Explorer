@@ -60,10 +60,10 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4">Get In Touch</h3>
             <p className="text-gray-300 mb-2">Malawi Tech Explorer</p>
-            <p className="text-gray-300 mb-2">tech.malawiexplorer@gmail.com</p>
-            <p className="text-gray-300">+265 995 077 260</p>
+            <p className="text-gray-300 mb-2">hello.explorer@gmail.com</p>
+            <p className="text-gray-300">+265 986 446 152</p>
             <p className="text-gray-300 mt-4 text-sm">
-              Submit your startup or tech story: pitches.malawiexplorer@gmail.com
+              Submit your startup or tech story: pitches.explorer@gmail.com
             </p>
           </div>
         </div>

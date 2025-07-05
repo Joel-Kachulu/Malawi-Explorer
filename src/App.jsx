@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -13,6 +12,7 @@ import HomePage from '@/pages/HomePage';
 import HistoryPage from '@/pages/HistoryPage';
 import PlacesPage from '@/pages/PlacesPage';
 import PlaceDetailPage from '@/pages/PlaceDetailPage';
+import ContactPage from '@/pages/ContactPage';
 import AdminLoginPage from '@/pages/admin/AdminLoginPage';
 import AdminDashboardPage from '@/pages/admin/AdminDashboardPage';
 import AdminContentPage from '@/pages/admin/AdminContentPage';
@@ -116,6 +116,7 @@ const MainAppLayout = () => (
         <Route path="/history" element={<HistoryPage />} />
         <Route path="/places" element={<PlacesPage />} />
         <Route path="/places/:id" element={<PlaceDetailPage />} />
+        <Route path="/contact" element={<ContactPage />} />
       </Routes>
     </main>
     <div className="fixed bottom-6 right-6 z-50">

@@ -22,7 +22,7 @@ const PlaceDetailPage = () => {
     if (!supabase) {
       toast({
         title: "Supabase not available",
-        description: "Cannot fetch place details.",
+        description: "Cannot fetch article details.",
         variant: "destructive",
       });
       setIsLoading(false);
@@ -45,7 +45,7 @@ const PlaceDetailPage = () => {
         .single();
 
       if (error) throw error;
-      if (!data) throw new Error("Place not found");
+      if (!data) throw new Error("article not found");
 
       setPlace({
         id: data.id,
@@ -150,7 +150,7 @@ const PlaceDetailPage = () => {
         {place.content ? (
           <div dangerouslySetInnerHTML={{ __html: place.content.replace(/\n/g, '<br />') }} />
         ) : (
-          <p>No detailed content available for this place yet.</p>
+          <p>No detailed content available for this article yet.</p>
         )}
       </CardContent>
     </Card>

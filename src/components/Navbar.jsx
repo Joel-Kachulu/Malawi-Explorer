@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -16,6 +15,7 @@ const Navbar = () => {
     { name: 'Home', path: '/' },
     { name: 'Tech Revolution', path: '/history' },
     { name: 'Blogs', path: '/places' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   const navVariants = {

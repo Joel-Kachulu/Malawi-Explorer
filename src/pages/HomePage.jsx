@@ -124,7 +124,7 @@ const FeaturedPlaceCard = ({ place, variants }) => (
       <div className="h-48 bg-gray-200 relative overflow-hidden">
       <img src={place.featured_image_url || "https://images.unsplash.com/photo-1595078548716-c39ee1764aba"} alt={place.title} className="w-full h-full object-cover" />
         <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-xs font-medium py-1 px-2 rounded-full">
-          {place.category || 'Historical Site'}
+          {place.category || 'automation'}
         </div>
       </div>
       <CardContent className="p-6">
@@ -221,7 +221,7 @@ const HomePage = () => {
 
   const fetchFeaturedPlaces = useCallback(async () => {
     if (!supabase) {
-      toast({ title: "Supabase not available", description: "Using local data for featured places.", variant: "destructive" });
+      toast({ title: "Supabase not available", description: "Using local data for featured articles.", variant: "destructive" });
       setFeaturedPlaces([
         {
           id: 'local1',
@@ -266,9 +266,9 @@ const HomePage = () => {
       }));
       setFeaturedPlaces(placesData);
     } catch (error) {
-      toast({ title: "Error fetching featured places", description: error.message, variant: "destructive" });
+      toast({ title: "Error fetching featured articles", description: error.message, variant: "destructive" });
       setFeaturedPlaces([
-        { id: 'err1', title: 'Error Fetching Place 1', description: 'Please check connection.', category: 'Error', featured_image_url: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef' },
+        { id: 'err1', title: 'Error Fetching article 1', description: 'Please check connection.', category: 'Error', featured_image_url: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef' },
       ]);
     }
   }, [toast]);
