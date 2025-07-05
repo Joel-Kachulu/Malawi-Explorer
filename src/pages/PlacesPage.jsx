@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { supabase } from '@/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
+import { usePageTracking } from '@/hooks/useAnalytics';
 
 const PlaceCard = ({ place, variants }) => (
   <motion.div variants={variants} className="place-card">
@@ -45,6 +46,12 @@ const PlacesPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
+  const { trackPageView } = usePageTracking();
+
+  // Track page view on component mount
+  useEffect(() => {
+    trackPageView('/places', 'Tech Blogs - Malawi Tech Explorer');
+  }, [trackPageView]);
 
   const fetchPlacesAndCategories = useCallback(async () => {
     setIsLoading(true);
@@ -128,7 +135,7 @@ const PlacesPage = () => {
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Explore Malawi Tech</h1>
             <p className="text-xl opacity-90">
-              Explore Malawi’s thriving tech ecosystem: startups, innovation hubs, digital infrastructure, and smart solutions shaping the future.
+              Explore Malawi's thriving tech ecosystem: startups, innovation hubs, digital infrastructure, and smart solutions shaping the future.
             </p>
           </motion.div>
         </div>

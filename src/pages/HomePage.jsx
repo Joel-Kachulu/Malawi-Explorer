@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -7,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { supabase } from '@/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
+import { usePageTracking } from '@/hooks/useAnalytics';
 
 const HeroSection = () => (
   <section className="relative overflow-hidden bg-gradient-to-br from-green-50 to-green-100 hero-pattern">
@@ -80,7 +80,7 @@ const AboutMalawiSection = () => (
           </div>
           <h3 className="text-xl font-bold mb-4">Trending Innovations</h3>
           <p className="text-gray-700">
-           Explore the latest breakthroughs in AI, blockchain, and digital tools shaping Malawi’s future.
+           Explore the latest breakthroughs in AI, blockchain, and digital tools shaping Malawi's future.
           </p>
         </motion.div>
         <motion.div
@@ -203,7 +203,7 @@ const CallToActionSection = () => (
       >
         <h2 className="text-3xl md:text-4xl font-bold mb-6">Start Your Tech Journey Today</h2>
         <p className="text-xl mb-8">
-           Don’t miss out on the latest trends, tools, and ideas that will shape the next decade..
+           Don't miss out on the latest trends, tools, and ideas that will shape the next decade..
         </p>
         <Button asChild size="lg" variant="outline" className="bg-white text-green-700 hover:bg-green-50 border-white">
           <Link to="/history">
@@ -218,6 +218,12 @@ const CallToActionSection = () => (
 const HomePage = () => {
   const [featuredPlaces, setFeaturedPlaces] = useState([]);
   const { toast } = useToast();
+  const { trackPageView } = usePageTracking();
+
+  // Track page view on component mount
+  useEffect(() => {
+    trackPageView('/', 'Malawi Tech Explorer - Home');
+  }, [trackPageView]);
 
   const fetchFeaturedPlaces = useCallback(async () => {
     if (!supabase) {
@@ -225,14 +231,14 @@ const HomePage = () => {
       setFeaturedPlaces([
         {
           id: 'local1',
-          title: 'AI Revolution: What’s Next for Developers',
+          title: 'AI Revolution: What\'s Next for Developers',
           description: 'A deep dive into the tools and trends redefining the way software is built.',
           category: 'Artificial Intelligence',
           featured_image_url: 'https://images.unsplash.com/photo-1581093588401-4bfa4b30c527',
         },
         {
           id: 'local2',
-          title: 'Africa’s Rising Startup Ecosystem',
+          title: 'Africa\'s Rising Startup Ecosystem',
           description: 'How young tech entrepreneurs are reshaping economies across the continent.',
           category: 'Startups',
           featured_image_url: 'https://images.unsplash.com/photo-1603570417831-38cbe6c4e9ed',

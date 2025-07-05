@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
+import { usePageTracking } from '@/hooks/useAnalytics';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +17,12 @@ const ContactPage = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const { trackPageView } = usePageTracking();
+
+  // Track page view on component mount
+  useEffect(() => {
+    trackPageView('/contact', 'Contact Us - Malawi Tech Explorer');
+  }, [trackPageView]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

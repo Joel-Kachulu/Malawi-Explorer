@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { usePageTracking } from '@/hooks/useAnalytics';
 
 // Updated data for tech timeline
 const timelineEvents = [
@@ -80,6 +81,13 @@ const culturalFacts = [
 ];
 
 const HistoryPage = () => {
+  const { trackPageView } = usePageTracking();
+
+  // Track page view on component mount
+  useEffect(() => {
+    trackPageView('/history', 'Malawi Tech Revolution - History');
+  }, [trackPageView]);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

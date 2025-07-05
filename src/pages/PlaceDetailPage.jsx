@@ -10,12 +10,14 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
+import { usePageTracking } from '@/hooks/useAnalytics';
 
 const PlaceDetailPage = () => {
   const { id } = useParams();
   const [place, setPlace] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
+  const { trackPageView } = usePageTracking();
 
   const fetchPlaceDetails = useCallback(async () => {
     setIsLoading(true);
@@ -79,6 +81,13 @@ const PlaceDetailPage = () => {
   useEffect(() => {
     fetchPlaceDetails();
   }, [fetchPlaceDetails]);
+
+  // Track page view when place data is loaded
+  useEffect(() => {
+    if (place) {
+      trackPageView(`/places/${id}`, `${place.title} - Malawi Tech Explorer`);
+    }
+  }, [place, id, trackPageView]);
 
   if (isLoading) {
     return (
