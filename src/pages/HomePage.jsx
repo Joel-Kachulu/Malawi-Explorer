@@ -251,6 +251,27 @@ const HomePage = () => {
           category: 'Telecom',
           featured_image_url: 'https://images.unsplash.com/photo-1559027615-5e247fbb4c64',
         },
+        {
+          id: 'local4',
+          title: 'Women in Tech: Malawi\'s Trailblazers',
+          description: 'Celebrating the women leading innovation and change in Malawi\'s tech scene.',
+          category: 'Diversity',
+          featured_image_url: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308',
+        },
+        {
+          id: 'local5',
+          title: 'Green Tech: Sustainable Solutions',
+          description: 'How technology is driving sustainability and environmental protection in Malawi.',
+          category: 'Sustainability',
+          featured_image_url: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca',
+        },
+        {
+          id: 'local6',
+          title: 'EdTech: Transforming Education',
+          description: 'The digital tools and platforms revolutionizing learning for Malawi\'s youth.',
+          category: 'Education',
+          featured_image_url: 'https://images.unsplash.com/photo-1503676382389-4809596d5290',
+        },
       ]);
       
       return;
@@ -260,7 +281,7 @@ const HomePage = () => {
         .from('articles')
         .select('id, title, description, categories(name), media(file_path)') 
         .order('created_at', { ascending: false })
-        .limit(3);
+        .limit(6);
 
       if (error) throw error;
 
