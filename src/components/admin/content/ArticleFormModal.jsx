@@ -3,11 +3,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { UploadCloud, Maximize2, Minimize2 } from 'lucide-react';
+import { UploadCloud, Maximize2, Minimize2, Eye, EyeOff } from 'lucide-react';
 import { supabase } from '@/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import './RichTextEditor.css';
+import ImageResizeModule from './ImageResizeModule';
 import {
   Dialog,
   DialogContent,
@@ -17,27 +19,72 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+// Enhanced toolbar configuration with comprehensive formatting options
 const modules = {
   toolbar: [
+    // Text formatting
     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    [{ 'font': [] }],
+    [{ 'size': ['small', false, 'large', 'huge'] }],
+    
+    // Text styling
     ['bold', 'italic', 'underline', 'strike'],
-    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-    ['link', 'image'],
-    ['clean'],
     [{ 'color': [] }, { 'background': [] }],
-    ['blockquote', 'code-block'],
+    [{ 'script': 'sub'}, { 'script': 'super' }],
+    
+    // Text alignment and indentation
     [{ 'align': [] }],
+    [{ 'indent': '-1'}, { 'indent': '+1' }],
+    [{ 'direction': 'rtl' }],
+    
+    // Lists and formatting
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    
+    // Special formatting
+    ['blockquote', 'code-block'],
+    
+    // Links and media
+    ['link', 'image', 'video'],
+    
+    // Clean formatting
+    ['clean']
   ],
+  
+  // Keyboard shortcuts
+  keyboard: {
+    bindings: {
+      tab: {
+        key: 9,
+        handler: function() {
+          return true;
+        }
+      }
+    }
+  },
+  
+  // Clipboard handling
+  clipboard: {
+    matchVisual: false,
+  },
+  
+  // History for undo/redo
+  history: {
+    delay: 2000,
+    maxStack: 500,
+    userOnly: true
+  }
 };
 
+// Comprehensive formats array
 const formats = [
-  'header',
+  'header', 'font', 'size',
   'bold', 'italic', 'underline', 'strike',
+  'color', 'background', 'script',
+  'align', 'indent', 'direction',
   'list', 'bullet',
-  'link', 'image',
-  'color', 'background',
   'blockquote', 'code-block',
-  'align'
+  'link', 'image', 'video',
+  'clean'
 ];
 
 const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
@@ -56,6 +103,8 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
   const [isLoadingCategories, setIsLoadingCategories] = useState(false);
   const [previewImage, setPreviewImage] = useState(null);
   const [isEditorFullScreen, setIsEditorFullScreen] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
+  const [quillInstance, setQuillInstance] = useState(null);
 
   const fetchCategories = useCallback(async () => {
     if (!supabase) return;
@@ -103,6 +152,13 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
     }
   }, [isOpen, article, fetchCategories]);
 
+  // Initialize image resize module when Quill instance is available
+  useEffect(() => {
+    if (quillInstance) {
+      new ImageResizeModule(quillInstance);
+    }
+  }, [quillInstance]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -134,9 +190,12 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => { if (!open) { setPreviewImage(null); } onClose(); }}>
-      <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className={`${isEditorFullScreen ? 'max-w-[95vw] max-h-[95vh]' : 'sm:max-w-[800px]'} max-h-[90vh] overflow-y-auto`}>
         <DialogHeader>
           <DialogTitle>{article ? 'Edit Article' : 'Add New Article'}</DialogTitle>
+          <DialogDescription>
+            Create or edit your article with our enhanced rich text editor
+          </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="grid gap-6 py-4">
@@ -153,34 +212,54 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
           <div className="grid gap-2">
             <div className="flex justify-between items-center">
               <Label htmlFor="content">Content</Label>
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                onClick={() => setIsEditorFullScreen(!isEditorFullScreen)}
-              >
-                {isEditorFullScreen ? <><Minimize2 className="mr-1 h-4 w-4" /> Collapse</> : <><Maximize2 className="mr-1 h-4 w-4" /> Fullscreen</>}
-              </Button>
+              <div className="flex items-center gap-2">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowPreview(!showPreview)}
+                >
+                  {showPreview ? <><EyeOff className="mr-1 h-4 w-4" /> Hide Preview</> : <><Eye className="mr-1 h-4 w-4" /> Show Preview</>}
+                </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsEditorFullScreen(!isEditorFullScreen)}
+                >
+                  {isEditorFullScreen ? <><Minimize2 className="mr-1 h-4 w-4" /> Collapse</> : <><Maximize2 className="mr-1 h-4 w-4" /> Fullscreen</>}
+                </Button>
+              </div>
             </div>
-            <div className={`rounded-md border border-input bg-background ${isEditorFullScreen ? 'fixed inset-0 z-50 p-4 bg-white overflow-auto' : ''}`}>
-              <ReactQuill
-                theme="snow"
-                value={formData.content}
-                onChange={handleContentChange}
-                modules={modules}
-                formats={formats}
-                placeholder="Write your article content here..."
-                className={isEditorFullScreen ? 'h-[80vh]' : 'h-60'}
-              />
-              {isEditorFullScreen && (
-                <div className="mt-4 flex justify-end">
-                  <Button onClick={() => setIsEditorFullScreen(false)}>Close Fullscreen</Button>
-                </div>
-              )}
-            </div>
+            
+            {showPreview ? (
+              <div className="border rounded-md p-4 bg-gray-50 max-h-96 overflow-y-auto">
+                <div 
+                  className="prose prose-sm max-w-none"
+                  dangerouslySetInnerHTML={{ __html: formData.content }}
+                />
+              </div>
+            ) : (
+              <div className={`rich-text-editor ${isEditorFullScreen ? 'fullscreen' : ''}`}>
+                <ReactQuill
+                  theme="snow"
+                  value={formData.content}
+                  onChange={handleContentChange}
+                  modules={modules}
+                  formats={formats}
+                  placeholder="Write your article content here... Use the toolbar above for rich formatting options including headers, lists, links, images, tables, and more!"
+                  className={`${isEditorFullScreen ? 'h-[80vh]' : 'h-80'} ${showPreview ? 'hidden' : ''}`}
+                  onEditorReady={(quill) => setQuillInstance(quill)}
+                />
+                {isEditorFullScreen && (
+                  <div className="mt-4 flex justify-end p-4 bg-white border-t">
+                    <Button onClick={() => setIsEditorFullScreen(false)}>Close Fullscreen</Button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
-          {/* Added spacing between the editor and next fields */}
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="grid gap-2">
               <Label htmlFor="publish_date">Publish Date</Label>
@@ -198,48 +277,65 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
               >
                 <option value="" disabled>Select a category</option>
-                {categories.map(cat => (
-                  <option key={cat.id} value={cat.id}>{cat.name}</option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
                 ))}
               </select>
-              {isLoadingCategories && <p className="text-xs text-gray-500">Loading categories...</p>}
             </div>
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="tags">Tags (comma-separated)</Label>
-            <Input id="tags" name="tags" value={formData.tags} onChange={handleInputChange} />
+            <Input 
+              id="tags" 
+              name="tags" 
+              value={formData.tags} 
+              onChange={handleInputChange} 
+              placeholder="tech, malawi, innovation, startup"
+            />
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="image_file">Featured Image</Label>
-            {previewImage && (
-              <div className="my-2">
-                <img src={previewImage} alt="Preview" className="max-h-40 rounded-md object-contain" />
-              </div>
-            )}
-            <label htmlFor="image-upload" className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <UploadCloud className="w-8 h-8 mb-2 text-gray-500" />
-                <p className="text-sm text-gray-500">Click to upload or drag and drop</p>
-              </div>
-              <Input id="image-upload" name="image_file" type="file" className="hidden" onChange={handleFileChange} accept="image/*" />
-            </label>
-            {formData.image_file && <p className="text-sm text-gray-500 mt-1">New file: {formData.image_file.name}</p>}
+            <div className="flex items-center gap-4">
+              <Input
+                id="image_file"
+                name="image_file"
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="flex-1"
+              />
+              {previewImage && (
+                <div className="w-20 h-20 border rounded overflow-hidden">
+                  <img src={previewImage} alt="Preview" className="w-full h-full object-cover" />
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="video_url">Video URL</Label>
-            <Input id="video_url" name="video_url" value={formData.video_url} onChange={handleInputChange} placeholder="https://www.youtube.com/watch?v=example" />
+            <Label htmlFor="video_url">Video URL (optional)</Label>
+            <Input 
+              id="video_url" 
+              name="video_url" 
+              value={formData.video_url} 
+              onChange={handleInputChange} 
+              placeholder="https://www.youtube.com/watch?v=..."
+            />
           </div>
-        </form>
 
-        <DialogFooter>
-          <Button variant="outline" onClick={() => { setPreviewImage(null); onClose(); }}>Cancel</Button>
-          <Button type="submit" onClick={handleSubmit} className="bg-green-600 hover:bg-green-700">
-            {article ? 'Save Changes' : 'Add Article'}
-          </Button>
-        </DialogFooter>
+          <DialogFooter>
+            <Button type="button" variant="outline" onClick={onClose}>
+              Cancel
+            </Button>
+            <Button type="submit" className="bg-green-600 hover:bg-green-700">
+              {article ? 'Update Article' : 'Create Article'}
+            </Button>
+          </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );

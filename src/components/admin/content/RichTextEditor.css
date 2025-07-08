@@ -1,0 +1,323 @@
+/* Enhanced Rich Text Editor Styles */
+.rich-text-editor {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: white;
+}
+
+.rich-text-editor .ql-toolbar {
+  border: none;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+  padding: 0.75rem;
+}
+
+.rich-text-editor .ql-container {
+  border: none;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.rich-text-editor .ql-editor {
+  min-height: 300px;
+  padding: 1rem;
+  background: white;
+}
+
+.rich-text-editor .ql-editor:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* Toolbar Button Styles */
+.rich-text-editor .ql-toolbar button {
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  margin: 0 0.25rem;
+  background: transparent;
+  transition: all 0.2s ease;
+  font-size: 16px;
+  min-width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rich-text-editor .ql-toolbar button:hover {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.rich-text-editor .ql-toolbar button.ql-active {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+/* Toolbar Select Styles */
+.rich-text-editor .ql-toolbar select {
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: white;
+  font-size: 14px;
+  margin: 0 0.25rem;
+  min-width: 120px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.rich-text-editor .ql-toolbar select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* Color Picker Styles */
+.rich-text-editor .ql-toolbar input[type="color"] {
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  cursor: pointer;
+  margin: 0 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.rich-text-editor .ql-toolbar input[type="color"]:hover {
+  border-color: #3b82f6;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Content Styles */
+.rich-text-editor .ql-editor h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 1.5rem 0 1rem 0;
+  color: #1f2937;
+}
+
+.rich-text-editor .ql-editor h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 1.25rem 0 0.75rem 0;
+  color: #374151;
+}
+
+.rich-text-editor .ql-editor h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1rem 0 0.5rem 0;
+  color: #4b5563;
+}
+
+.rich-text-editor .ql-editor h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0.75rem 0 0.5rem 0;
+  color: #6b7280;
+}
+
+.rich-text-editor .ql-editor h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0.5rem 0 0.25rem 0;
+  color: #6b7280;
+}
+
+.rich-text-editor .ql-editor h6 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0.5rem 0 0.25rem 0;
+  color: #6b7280;
+}
+
+.rich-text-editor .ql-editor p {
+  margin: 0.75rem 0;
+  line-height: 1.7;
+}
+
+.rich-text-editor .ql-editor blockquote {
+  border-left: 4px solid #3b82f6;
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  background: #f8fafc;
+  font-style: italic;
+  color: #4b5563;
+}
+
+.rich-text-editor .ql-editor pre {
+  background: #1f2937;
+  color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.875rem;
+}
+
+.rich-text-editor .ql-editor code {
+  background: #f3f4f6;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.875rem;
+  color: #dc2626;
+}
+
+.rich-text-editor .ql-editor pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+.rich-text-editor .ql-editor ul,
+.rich-text-editor .ql-editor ol {
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+}
+
+.rich-text-editor .ql-editor li {
+  margin: 0.25rem 0;
+  line-height: 1.6;
+}
+
+.rich-text-editor .ql-editor ul li {
+  list-style-type: disc;
+}
+
+.rich-text-editor .ql-editor ol li {
+  list-style-type: decimal;
+}
+
+.rich-text-editor .ql-editor a {
+  color: #3b82f6;
+  text-decoration: underline;
+  text-decoration-color: #93c5fd;
+  text-underline-offset: 2px;
+}
+
+.rich-text-editor .ql-editor a:hover {
+  color: #2563eb;
+  text-decoration-color: #3b82f6;
+}
+
+.rich-text-editor .ql-editor img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.rich-text-editor .ql-editor table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.rich-text-editor .ql-editor table th,
+.rich-text-editor .ql-editor table td {
+  border: 1px solid #e5e7eb;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.rich-text-editor .ql-editor table th {
+  background: #f9fafb;
+  font-weight: 600;
+  color: #374151;
+}
+
+.rich-text-editor .ql-editor table tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+.rich-text-editor .ql-editor table tr:hover {
+  background: #f3f4f6;
+}
+
+/* Fullscreen Mode */
+.rich-text-editor.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: white;
+  border-radius: 0;
+}
+
+.rich-text-editor.fullscreen .ql-editor {
+  min-height: calc(100vh - 120px);
+}
+
+/* Custom Toolbar Organization */
+.rich-text-editor .ql-toolbar .toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding-right: 0.75rem;
+  border-right: 1px solid #e5e7eb;
+  margin-right: 0.75rem;
+}
+
+.rich-text-editor .ql-toolbar .toolbar-group:last-child {
+  border-right: none;
+  padding-right: 0;
+  margin-right: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .rich-text-editor .ql-toolbar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .rich-text-editor .ql-toolbar .toolbar-group {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  
+  .rich-text-editor .ql-editor {
+    min-height: 250px;
+    padding: 0.75rem;
+  }
+}
+
+/* Focus States */
+.rich-text-editor:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Placeholder Styles */
+.rich-text-editor .ql-editor.ql-blank::before {
+  color: #9ca3af;
+  font-style: italic;
+  font-size: 14px;
+}
+
+/* Selection Styles */
+.rich-text-editor .ql-editor ::selection {
+  background: rgba(59, 130, 246, 0.2);
+}
+
+.rich-text-editor .ql-editor ::-moz-selection {
+  background: rgba(59, 130, 246, 0.2);
+} 

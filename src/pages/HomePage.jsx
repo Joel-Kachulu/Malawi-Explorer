@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { supabase } from '@/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 import { usePageTracking } from '@/hooks/useAnalytics';
+import SubscribeToNewsletter from '@/components/SubscribeToNewsletter';
 
 const HeroSection = () => (
   <section className="relative overflow-hidden bg-gradient-to-br from-green-50 to-green-100 hero-pattern">
@@ -294,12 +295,13 @@ const HomePage = () => {
   };
 
   return (
-    <main>
+    <>
       <HeroSection />
+      <SubscribeToNewsletter />
       <AboutMalawiSection />
       <FeaturedPlacesSection places={featuredPlaces} containerVariants={containerVariants} itemVariants={itemVariants} />
       <CallToActionSection />
-    </main>
+    </>
   );
 };
 

@@ -153,7 +153,7 @@ const PlaceDetailPage = () => {
   >
     <Card className="rounded-2xl shadow-md mb-10">
       <CardHeader>
-        <CardTitle className="text-2xl text-gray-800">About {place.title}</CardTitle>
+        <CardTitle className="text-2xl text-gray-800">{place.title}</CardTitle>
       </CardHeader>
       <CardContent className="prose prose-lg max-w-none text-gray-700">
         {place.content ? (
