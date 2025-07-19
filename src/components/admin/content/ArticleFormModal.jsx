@@ -105,6 +105,8 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
   const [isEditorFullScreen, setIsEditorFullScreen] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [quillInstance, setQuillInstance] = useState(null);
+  const [customCategory, setCustomCategory] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const fetchCategories = useCallback(async () => {
     if (!supabase) return;
@@ -136,6 +138,7 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
           video_url: article.video_url || ''
         });
         setPreviewImage(article.featured_image_url || null);
+        setCustomCategory('');
       } else {
         setFormData({
           title: '',
@@ -148,6 +151,7 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
           video_url: ''
         });
         setPreviewImage(null);
+        setCustomCategory('');
       }
     }
   }, [isOpen, article, fetchCategories]);
@@ -183,9 +187,42 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleCategoryChange = (e) => {
+    const value = e.target.value;
+    setFormData(prev => ({ ...prev, category_id: value }));
+    if (value === 'custom') {
+      setCustomCategory('');
+    } else {
+      setCustomCategory('');
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    setIsSubmitting(true);
+    let finalFormData = { ...formData };
+    if (formData.category_id === 'custom' && customCategory.trim()) {
+      // Create new category in Supabase
+      try {
+        const { data, error } = await supabase
+          .from('categories')
+          .insert({ name: customCategory.trim() })
+          .select('id')
+          .single();
+        if (error) throw error;
+        finalFormData.category_id = data.id;
+      } catch (error) {
+        toast({
+          title: 'Error creating category',
+          description: error.message,
+          variant: 'destructive',
+        });
+        setIsSubmitting(false);
+        return;
+      }
+    }
+    onSubmit(finalFormData);
+    setIsSubmitting(false);
   };
 
   return (
@@ -271,7 +308,7 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
                 id="category_id"
                 name="category_id"
                 value={formData.category_id}
-                onChange={handleInputChange}
+                onChange={handleCategoryChange}
                 required
                 disabled={isLoadingCategories}
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
@@ -282,7 +319,17 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
                     {category.name}
                   </option>
                 ))}
+                <option value="custom">Other (type new)</option>
               </select>
+              {formData.category_id === 'custom' && (
+                <Input
+                  className="mt-2"
+                  placeholder="Type new category name"
+                  value={customCategory}
+                  onChange={e => setCustomCategory(e.target.value)}
+                  required
+                />
+              )}
             </div>
           </div>
 
@@ -331,8 +378,8 @@ const ArticleFormModal = ({ isOpen, onClose, onSubmit, article }) => {
             <Button type="button" variant="outline" onClick={onClose}>
               Cancel
             </Button>
-            <Button type="submit" className="bg-green-600 hover:bg-green-700">
-              {article ? 'Update Article' : 'Create Article'}
+            <Button type="submit" className="bg-green-600 hover:bg-green-700" disabled={isSubmitting}>
+              {isSubmitting ? (article ? 'Updating...' : 'Creating...') : (article ? 'Update Article' : 'Create Article')}
             </Button>
           </DialogFooter>
         </form>
